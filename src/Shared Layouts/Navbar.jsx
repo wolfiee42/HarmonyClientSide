@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import Container from '../Components/Container'
 import { FaBell } from "react-icons/fa";
 import Button from '../Components/Button';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Navbar = () => {
     const navMenu = <>
@@ -10,7 +11,12 @@ const Navbar = () => {
         <li><Link>Membership</Link></li>
         <li><Link><FaBell className='text-xl' /></Link></li>
     </>
-    const [some, setsome] = useState(false)
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut();
+    }
+
     return (
         <div className=' bg-[#ECE3CE]'>
             <Container>
@@ -31,13 +37,11 @@ const Navbar = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="navbar-center hidden lg:flex">
+                    <div className="navbar-end hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
                             {navMenu}
                         </ul>
-                    </div>
-                    <div className="navbar-end">
-                        {!some ? <Link to='/login'>
+                        {!user ? <Link to='/login'>
                             <Button>Join Us</Button>
                         </Link> :
                             <div className="dropdown dropdown-end">
@@ -54,7 +58,7 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li><p onClick={handleLogout}>Logout</p></li>
                                 </ul>
                             </div>}
                     </div>
