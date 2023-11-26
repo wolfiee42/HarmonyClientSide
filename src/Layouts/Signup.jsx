@@ -7,22 +7,41 @@ import { FaPen } from "react-icons/fa";
 import { MdImage } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-
+import axios from "axios";
 
 
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUser } = useContext(AuthContext);
+    const imgbbkey = import.meta.env.VITE_imgbb_key;
+    const imgbbapi = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbkey}`;
 
-    const onSubmit = (data) => {
+
+    const onSubmit = async (data) => {
         const name = data.name;
         const email = data.email;
         const password = data.password;
+        const imageFile = { image: data.image[0] };
+
+        const res = await axios.post(imgbbapi, imageFile, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        const photo = res.data.data.display_url;
+
 
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
+                updateUser(name, photo)
+                    .then(() => {
+                        // console.log("user Updated successfully.");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             })
             .catch(error => {
                 console.log(error);
@@ -55,7 +74,7 @@ const Signup = () => {
                                 {errors.password && <span className="mt-1 text-red-600">Password is required</span>}
                             </div>
                             <div className="relative form-control">
-                                <MdImage className="absolute -left-8 top-2 text-xl" /> <input type="file" placeholder="Email" className="mb-8 p-1 w-[300px]" />
+                                <MdImage className="absolute -left-8 top-2 text-xl" /> <input {...register("image")} type="file" placeholder="Email" className="mb-8 p-1 w-[300px]" />
                             </div>
                             <div className="form-control">
                                 <button className="btn">Sign Up</button>

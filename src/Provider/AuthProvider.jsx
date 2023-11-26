@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.confiq";
 
 export const AuthContext = createContext();
@@ -20,6 +20,13 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    const updateUser = (name, photo) => {
+        setloading(true);
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
+
     const logOut = () => {
         setloading(true);
         return signOut(auth)
@@ -37,7 +44,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const authinfo = { createUser, user, loading, login, logOut };
+    const authinfo = { createUser, user, loading, login, updateUser, logOut };
     return (
         <AuthContext.Provider value={authinfo}>
             {children}
