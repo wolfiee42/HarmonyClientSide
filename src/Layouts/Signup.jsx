@@ -13,10 +13,14 @@ import axios from "axios";
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, socialLogin } = useContext(AuthContext);
     const imgbbkey = import.meta.env.VITE_imgbb_key;
     const imgbbapi = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbkey}`;
 
+
+    const handleSocialLogin = () => {
+        return socialLogin()
+    }
 
     const onSubmit = async (data) => {
         const name = data.name;
@@ -83,7 +87,7 @@ const Signup = () => {
 
                         <div className="flex items-center gap-5 my-5">
                             <p className="text-lg font-semibold">Or Sign up With </p>
-                            <button className="btn"> <FcGoogle className="text-xl" /></button>
+                            <button className="btn" onClick={handleSocialLogin}> <FcGoogle className="text-xl" /></button>
                         </div>
                     </div>
                 </div>

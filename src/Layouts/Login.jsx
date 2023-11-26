@@ -8,7 +8,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
-    const { login } = useContext(AuthContext);
+    const { login, socialLogin } = useContext(AuthContext);
     const onSubmit = (data) => {
 
         const email = data.email;
@@ -23,6 +23,12 @@ const Login = () => {
             })
 
     }
+
+    const handleSocialLogin = () => {
+        return socialLogin()
+    }
+
+
     return (
         <div className="bg-[#ECE3CE] min-h-screen">
             <div className="max-w-5xl mx-auto flex justify-center items-start bg-white rounded-lg  shadow-2xl">
@@ -46,7 +52,7 @@ const Login = () => {
 
                     <div className="flex items-center gap-5 my-5">
                         <p className="text-lg font-semibold">Or Login With </p>
-                        <button className="btn"> <FcGoogle className="text-xl" /></button>
+                        <button className="btn" onClick={handleSocialLogin}> <FcGoogle className="text-xl" /></button>
                     </div>
                 </div>
             </div>
