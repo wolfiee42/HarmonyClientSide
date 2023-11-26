@@ -53,11 +53,11 @@ const Navbar = () => {
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#739072] text-white rounded-box w-52">
                                     <li>
                                         <a className="justify-between">
-                                          {user?.displayName}
+                                            {user?.displayName}
                                             <span className="badge">New</span>
                                         </a>
                                     </li>
-                                    <li><a>Settings</a></li>
+                                    <li><Link to='/dashboard'>Dashboard</Link></li>
                                     <li><p onClick={handleLogout}>Logout</p></li>
                                 </ul>
                             </div>}

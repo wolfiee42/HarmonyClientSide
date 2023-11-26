@@ -6,6 +6,14 @@ import ErrorPage from "../ErrorPage";
 import Home from "../Layouts/Home";
 import Login from "../Layouts/Login";
 import Signup from "../Layouts/Signup";
+import Dashboard from "../Dashboard/Dashboard";
+import MyProfile from "../Dashboard/User/MyProfile";
+import AddPost from "../Dashboard/User/AddPost";
+import MyPost from "../Dashboard/User/MyPost";
+import AdminProfile from "../Dashboard/Admin/AdminProfile";
+import ManageUser from "../Dashboard/Admin/ManageUser";
+import Report from "../Dashboard/Admin/Report";
+import Announcement from "../Dashboard/Admin/Announcement";
 
 const Router = createBrowserRouter([
     {
@@ -26,8 +34,47 @@ const Router = createBrowserRouter([
                 element: <Signup />
             },
 
-        ],
+        ]
     },
+    {
+        path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+
+            // user
+            {
+                path: '/dashboard/myprofile',
+                element: <MyProfile />
+            },
+            {
+                path: '/dashboard/addpost',
+                element: <AddPost />
+            },
+            {
+                path: '/dashboard/mypost',
+                element: <MyPost />
+            },
+
+            // admin
+            {
+                path: '/dashboard/admindash',
+                element: <AdminProfile />,
+            },
+            {
+                path: '/dashboard/manageuser',
+                element: <ManageUser />,
+            },
+            {
+                path: '/dashboard/report',
+                element: <Report />,
+            },
+            {
+                path: '/dashboard/announcement',
+                element: <Announcement />,
+            },
+
+        ]
+    }
 ]);
 
 export default Router;
