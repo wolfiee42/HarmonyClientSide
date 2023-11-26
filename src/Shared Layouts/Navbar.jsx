@@ -37,7 +37,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        {some ? <Link>
+                        {!some ? <Link to='/login'>
                             <Button>Join Us</Button>
                         </Link> :
                             <div className="dropdown dropdown-end">
