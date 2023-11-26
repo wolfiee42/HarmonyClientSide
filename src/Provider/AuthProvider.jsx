@@ -2,6 +2,8 @@
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.confiq";
+import useAxiosPublic from '../Utilities/useAxiosPublic'
+
 
 export const AuthContext = createContext();
 
@@ -9,6 +11,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setloading] = useState(true);
     const [user, setUser] = useState();
     const provider = new GoogleAuthProvider();
+    const axiosPublic = useAxiosPublic();
 
     const createUser = (email, password) => {
         setloading(true)
@@ -42,11 +45,20 @@ const AuthProvider = ({ children }) => {
             console.log('spying on ', currentuser);
             setUser(currentuser);
             setloading(false)
+            if (currentuser) {
+                const user = { email: currentuser?.email };
+                axiosPublic.post('/jwt', user)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
+            } 
         })
         return () => {
             () => unsubscribe()
         }
-    }, [])
+    }, [axiosPublic])
 
 
     const authinfo = { createUser, user, loading, login, updateUser, logOut, socialLogin };
