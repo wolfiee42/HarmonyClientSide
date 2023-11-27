@@ -8,6 +8,7 @@ import { MdImage } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import useAxiosPublic from "../Utilities/useAxiosPublic";
 
 
 
@@ -16,10 +17,23 @@ const Signup = () => {
     const { createUser, updateUser, socialLogin } = useContext(AuthContext);
     const imgbbkey = import.meta.env.VITE_imgbb_key;
     const imgbbapi = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbkey}`;
-
+    const axiosPublic = useAxiosPublic();
 
     const handleSocialLogin = () => {
-        return socialLogin()
+        socialLogin()
+            .then(res => {
+                const user = {
+                    name: res.user?.displayName,
+                    email: res.user?.email
+                }
+                axiosPublic.post("/users", user)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            alert("account created")
+                        }
+                    })
+            })
     }
 
     const onSubmit = async (data) => {
@@ -39,9 +53,16 @@ const Signup = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
+                const user = { name, email }
                 updateUser(name, photo)
                     .then(() => {
-                        // console.log("user Updated successfully.");
+                        axiosPublic.post("/users", user)
+                            .then(res => {
+                                console.log(res.data);
+                                if (res.data.insertedId) {
+                                    alert("account created")
+                                }
+                            })
                     })
                     .catch(error => {
                         console.log(error);

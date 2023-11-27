@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import useAxiosPublic from "../Utilities/useAxiosPublic";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const { login, socialLogin } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
     const onSubmit = (data) => {
 
         const email = data.email;
@@ -25,7 +27,20 @@ const Login = () => {
     }
 
     const handleSocialLogin = () => {
-        return socialLogin()
+        socialLogin()
+            .then(res => {
+                const user = {
+                    name: res.user?.displayName,
+                    email: res.user?.email
+                };
+                axiosPublic.post("/users", user)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            alert("account created")
+                        }
+                    })
+            })
     }
 
 
