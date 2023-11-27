@@ -47,7 +47,7 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+                                        <img alt={user?.displayName} src={user?.photoURL} />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#739072] text-white rounded-box w-52">

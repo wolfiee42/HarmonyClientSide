@@ -29,9 +29,11 @@ const Login = () => {
     const handleSocialLogin = () => {
         socialLogin()
             .then(res => {
+                const badge = "bronze"
                 const user = {
                     name: res.user?.displayName,
-                    email: res.user?.email
+                    email: res.user?.email, 
+                    badge
                 };
                 axiosPublic.post("/users", user)
                     .then(res => {

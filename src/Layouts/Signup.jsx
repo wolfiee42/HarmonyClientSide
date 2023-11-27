@@ -22,9 +22,11 @@ const Signup = () => {
     const handleSocialLogin = () => {
         socialLogin()
             .then(res => {
+                const badge = "bronze"
                 const user = {
                     name: res.user?.displayName,
-                    email: res.user?.email
+                    email: res.user?.email,
+                    badge
                 }
                 axiosPublic.post("/users", user)
                     .then(res => {
@@ -53,7 +55,8 @@ const Signup = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
-                const user = { name, email }
+                const badge = "bronze"
+                const user = { name, email,badge }
                 updateUser(name, photo)
                     .then(() => {
                         axiosPublic.post("/users", user)
