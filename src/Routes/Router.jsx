@@ -14,6 +14,7 @@ import AdminProfile from "../Dashboard/Admin/AdminProfile";
 import ManageUser from "../Dashboard/Admin/ManageUser";
 import Report from "../Dashboard/Admin/Report";
 import Announcement from "../Dashboard/Admin/Announcement";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = createBrowserRouter([
     {
@@ -44,15 +45,15 @@ const Router = createBrowserRouter([
             // user
             {
                 path: '/dashboard/myprofile',
-                element: <MyProfile />
+                element: <PrivateRoute><MyProfile /></PrivateRoute>
             },
             {
                 path: '/dashboard/addpost',
-                element: <AddPost />
+                element: <PrivateRoute><AddPost /></PrivateRoute>
             },
             {
                 path: '/dashboard/mypost',
-                element: <MyPost />
+                element: <PrivateRoute><MyPost /></PrivateRoute>
             },
 
             // admin
