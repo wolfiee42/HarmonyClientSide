@@ -5,6 +5,7 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast";
 import { Toaster } from 'react-hot-toast';
+import { Link } from "react-router-dom";
 
 
 
@@ -13,6 +14,7 @@ const AddPost = () => {
     const { register, handleSubmit } = useForm();
     const { user } = useAuth();
     const [char, setChar] = useState({});
+    const [count, setcount] = useState();
     const [tag, setTag] = useState("");
     const handleTag = e => {
         e.preventDefault();
@@ -27,6 +29,13 @@ const AddPost = () => {
                 setChar(res.data);
             })
     }, [axiosSecure, user.email]);
+    useEffect(() => {
+        axiosSecure.get(`/posts/${user.email}`)
+            .then(res => {
+                console.log(res.data);
+                setcount(res.data);
+            })
+    }, [axiosSecure, user.email])
 
     const onsubmit = data => {
         const author = char?.name;
@@ -43,7 +52,10 @@ const AddPost = () => {
 
         axiosSecure.post('/posts', post)
             .then(res => {
-                console.log(res.data);
+                if (res.data.insertedId) {
+                    toast.success('Post Published Successfully');
+                    window.location.reload();
+                }
             })
 
     }
@@ -96,7 +108,7 @@ const AddPost = () => {
                     </div>
                 </div>
                 <div>
-                    <button className="w-[576px] btn"> Add Post</button>
+                    {count?.length < 5 ? <button className="w-[576px] btn"> Add Post</button> : <Link to={'/'}> <button className="btn w-[576px]">Get Membership</button> </Link>}
                 </div>
             </form>
             <Toaster
