@@ -1,20 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAxiosSecure from "../../Utilities/useAxiosSecure";
 import { FaUser } from "react-icons/fa";
-
+import Swal from 'sweetalert2'
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Utilities/useAuth";
 
 const ManageUser = () => {
     const axiosSecure = useAxiosSecure();
-    const [users, setUsers] = useState([])
-    useEffect(() => {
-        axiosSecure.get('/users')
-            .then(res => {
-                setUsers(res.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [axiosSecure])
+    const [users, setUsers] = useState([]);
+    const { user } = useAuth()
+    // useEffect(() => {
+    //     axiosSecure.get('/users')
+    //         .then(res => {
+    //             setUsers(res.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }, [axiosSecure]);
+
+    const { data, refetch } = useQuery({
+        queryKey: [user?.email],
+        queryFn: async () => {
+            axiosSecure.get('/users')
+                .then(res => {
+                    setUsers(res.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+    })
+
+
+    const handleMakeAdmin = (user) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/users/admin/${user._id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Hurrah!",
+                                text: `${user.name} has been updated to ADMIN.`,
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    }
     return (
         <div className="overflow-x-auto p-10">
             <table className="table">
@@ -34,7 +77,11 @@ const ManageUser = () => {
                             <th>{ind + 1}</th>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td><button className="btn"><FaUser /></button></td>
+                            {/* <td><button onClick={() => handleMakeAdmin(user)} className="btn"><FaUser /></button></td> */}
+                            <td>
+                                {user?.role ? "admin" : <button onClick={() => handleMakeAdmin(user)} className="btn"><FaUser /></button>}
+
+                            </td>
                             <td>{user?.badge}</td>
                         </tr>)
                     }
