@@ -4,6 +4,7 @@ import { FaBell } from "react-icons/fa";
 import Button from '../Components/Button';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
+import useAdmin from '../Utilities/useAdmin';
 
 const Navbar = () => {
     const navMenu = <>
@@ -12,6 +13,7 @@ const Navbar = () => {
         <li><Link><FaBell className='text-xl' /></Link></li>
     </>
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
 
     const handleLogout = () => {
         logOut();
@@ -57,7 +59,12 @@ const Navbar = () => {
                                             <span className="badge">New</span>
                                         </a>
                                     </li>
-                                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                                    {
+                                        user && isAdmin && <li><Link to='/dashboard/admindash'>Dashboard</Link></li>
+                                    }
+                                    {
+                                        user && !isAdmin && <li><Link to='/dashboard/myprofile'>Dashboard</Link></li>
+                                    }
                                     <li><p onClick={handleLogout}>Logout</p></li>
                                 </ul>
                             </div>}
