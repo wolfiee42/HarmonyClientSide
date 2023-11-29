@@ -3,7 +3,6 @@ import {
 } from "react-router-dom";
 import App from "../App";
 import ErrorPage from "../ErrorPage";
-import Home from "../Layouts/Home";
 import Login from "../Layouts/Login";
 import Signup from "../Layouts/Signup";
 import Dashboard from "../Dashboard/Dashboard";
@@ -15,6 +14,7 @@ import ManageUser from "../Dashboard/Admin/ManageUser";
 import Report from "../Dashboard/Admin/Report";
 import Announcement from "../Dashboard/Admin/Announcement";
 import PrivateRoute from "./PrivateRoute";
+import Home from "../Layouts/Home/Home";
 
 const Router = createBrowserRouter([
     {
