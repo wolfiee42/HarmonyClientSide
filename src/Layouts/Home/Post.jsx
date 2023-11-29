@@ -5,7 +5,6 @@ import { FaComment } from "react-icons/fa";
 
 
 const Post = ({ post }) => {
-    console.log(post);
     return (
         <div className="flex flex-col border-2 p-5 m-3 rounded-md shadow-2xl">
             <div className="flex gap-5 items-center">
