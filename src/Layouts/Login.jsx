@@ -1,7 +1,7 @@
 import { FaUserAlt } from "react-icons/fa";
 import { IoMdKey } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -10,7 +10,12 @@ import useAxiosPublic from "../Utilities/useAxiosPublic";
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const { login, socialLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const axiosPublic = useAxiosPublic();
+
+
     const onSubmit = (data) => {
 
         const email = data.email;
@@ -19,6 +24,7 @@ const Login = () => {
         login(email, password)
             .then(result => {
                 console.log(result.user);
+                navigate(from, {replace: true});
             })
             .catch(error => {
                 console.log(error);
@@ -29,6 +35,7 @@ const Login = () => {
     const handleSocialLogin = () => {
         socialLogin()
             .then(res => {
+                navigate(from, {replace: true});
                 const badge = "bronze"
                 const user = {
                     name: res.user?.displayName,

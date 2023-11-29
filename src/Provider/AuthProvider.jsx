@@ -9,10 +9,10 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [loading, setloading] = useState(true);
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({});
     const provider = new GoogleAuthProvider();
     const axiosPublic = useAxiosPublic();
-
+    console.log(user?.email);
     const createUser = (email, password) => {
         setloading(true)
         return createUserWithEmailAndPassword(auth, email, password)

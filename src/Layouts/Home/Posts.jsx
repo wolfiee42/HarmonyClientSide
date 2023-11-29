@@ -12,12 +12,11 @@ const Posts = () => {
 
 
     const pages = [...Array(numOfPages).keys()];
-    console.log(pages);
 
     useEffect(() => {
         axiosPublic.get(`/posts?page=${currentPage}&size=${itemPerPage}`)
             .then(res => {
-                setPosts(res.data);
+                setPosts(res.data.result);
 
             })
             .catch(error => {

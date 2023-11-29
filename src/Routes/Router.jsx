@@ -15,6 +15,7 @@ import Report from "../Dashboard/Admin/Report";
 import Announcement from "../Dashboard/Admin/Announcement";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../Layouts/Home/Home";
+import PostDetails from "../Layouts/Home/PostDetails";
 
 const Router = createBrowserRouter([
     {
@@ -25,6 +26,11 @@ const Router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
+            },
+            {
+                path: "/postdetails/:id",
+                element: <PostDetails />,
+                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params.id}`)
             },
             {
                 path: "/login",
