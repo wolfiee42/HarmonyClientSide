@@ -70,8 +70,8 @@ const Signup = () => {
             .then(result => {
                 console.log(result.user);
                 const badge = "bronze"
-                const user = { name, email, badge }
                 updateUser(name, photo)
+                const user = { name, email, badge }
                     .then(() => {
                         navigate(from, { replace: true });
                         axiosPublic.post("/users", user)

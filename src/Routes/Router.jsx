@@ -33,7 +33,7 @@ const Router = createBrowserRouter([
             {
                 path: "/postdetails/:id",
                 element: <PostDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params.id}`)
+                loader: ({ params }) => fetch(`https://harmony-server-side.vercel.app/posts/${params.id}`)
             },
             {
                 path: "/login",
@@ -71,7 +71,7 @@ const Router = createBrowserRouter([
             {
                 path: '/dashboard/mypost/:title',
                 element: <PrivateRoute><PostComments /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/comments/${params.title}`)
+                loader: ({ params }) => fetch(`https://harmony-server-side.vercel.app/comments/${params.title}`)
             },
 
             // admin
