@@ -1,6 +1,6 @@
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
-import { Link, Navigate, useLoaderData, useLocation } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 import Container from "../../Components/Container";
 import Swal from 'sweetalert2'
 import useAuth from "../../Utilities/useAuth"

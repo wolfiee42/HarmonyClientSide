@@ -2,18 +2,35 @@ import { Link } from 'react-router-dom';
 import Container from '../Components/Container'
 import { FaBell } from "react-icons/fa";
 import Button from '../Components/Button';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import useAdmin from '../Utilities/useAdmin';
+import useAxiosPublic from '../Utilities/useAxiosPublic';
 
 const Navbar = () => {
+    const axiosPublic = useAxiosPublic();
+    const [announ, setAnnoun] = useState(0);
     const navMenu = <>
         <li><Link>Home</Link></li>
         <li><Link to={'/membership'}>Membership</Link></li>
-        <li><Link><FaBell className='text-xl' /></Link></li>
+        <li className='text-xl indicator'><Link>
+
+            <span className="indicator-item badge">{announ}</span>
+
+            <FaBell> </FaBell>
+        </Link></li>
     </>
     const { user, logOut } = useContext(AuthContext);
     const [isAdmin] = useAdmin();
+
+    useEffect(() => {
+        axiosPublic.get('/announcementcount')
+            .then(res => {
+                console.log(res.data.result);
+                setAnnoun(res.data.result);
+
+            })
+    }, [axiosPublic])
 
     const handleLogout = () => {
         logOut();
@@ -40,7 +57,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="navbar-end hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1">
+                        <ul className="menu menu-horizontal mr-10 px-1">
                             {navMenu}
                         </ul>
                         {!user ? <Link to='/login'>

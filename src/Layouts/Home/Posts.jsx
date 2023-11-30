@@ -35,6 +35,7 @@ const Posts = (search) => {
 
     return (
         <div>
+            <h1 className=" text-3xl font-semibold my-8 ">Posts Section</h1>
             <div className='my-10'>
                 {
                     posts.map(post => <Post key={post._id} post={post} />)

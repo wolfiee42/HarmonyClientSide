@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Container from '../../Components/Container'
 import Posts from './Posts';
+import TagSection from './TagSection';
+import Announ from './Announ';
 
 const Home = () => {
     const [search, setSearch] = useState('');
@@ -27,6 +29,8 @@ const Home = () => {
                 </div>
             </div>
             <Container>
+                <TagSection />
+                <Announ/>
                 <Posts search={search} />
             </Container>
         </div>
