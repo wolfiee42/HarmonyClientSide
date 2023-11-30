@@ -69,7 +69,7 @@ const AddPost = () => {
         <div className="flex w-[90%] my-16 p-10 mx-auto bg-[#ECE3CE] space-x-7 rounded-md">
             <div className="space-y-5 w-1/3">
                 <img className="w-[200px] h-[200px] rounded-[50%]" src={user?.photoURL} alt="" />
-                <h1 className="text-xl">Author Name: <span className="font-semibold uppercase">{user?.displayName   }</span></h1>
+                <h1 className="text-xl">Author Name: <span className="font-semibold uppercase">{user?.displayName}</span></h1>
                 <h1 className="text-xl">Author Email: <span className="text-base">{user?.email}</span></h1>
             </div>
             <form onSubmit={handleSubmit(onsubmit)} className="w-2/3 space-y-5">
@@ -109,7 +109,7 @@ const AddPost = () => {
                     </div>
                 </div>
                 <div>
-                    {count?.length < 5 ? <button className="w-[576px] btn"> Add Post</button> : <Link to={'/'}> <button className="btn w-[576px]">Get Membership</button> </Link>}
+                    {count?.length < 5 || char.badge === "gold" ? <button className="w-[576px] btn"> Add Post</button> : <Link to={'/membership'}> <button className="btn w-[576px]">Get Membership</button> </Link>}
                 </div>
             </form>
             <Toaster

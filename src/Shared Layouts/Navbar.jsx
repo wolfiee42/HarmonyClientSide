@@ -9,7 +9,7 @@ import useAdmin from '../Utilities/useAdmin';
 const Navbar = () => {
     const navMenu = <>
         <li><Link>Home</Link></li>
-        <li><Link>Membership</Link></li>
+        <li><Link to={'/membership'}>Membership</Link></li>
         <li><Link><FaBell className='text-xl' /></Link></li>
     </>
     const { user, logOut } = useContext(AuthContext);

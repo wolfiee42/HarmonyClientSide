@@ -16,6 +16,7 @@ import Announcement from "../Dashboard/Admin/Announcement";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../Layouts/Home/Home";
 import PostDetails from "../Layouts/Home/PostDetails";
+import Membership from "../Layouts/Membership";
 
 const Router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const Router = createBrowserRouter([
             {
                 path: "/signup",
                 element: <Signup />
+            },
+            {
+                path: "/membership",
+                element: <PrivateRoute><Membership /></PrivateRoute>
             },
 
         ]
