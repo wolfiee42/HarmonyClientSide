@@ -2,10 +2,12 @@ import { FaUserAlt } from "react-icons/fa";
 import { IoMdKey } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Button from '../Components/Button'
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosPublic from "../Utilities/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
@@ -55,6 +57,9 @@ const Login = () => {
 
     return (
         <div className="bg-[#ECE3CE] min-h-screen">
+             <Helmet>
+                <title>Harmony | Login</title>
+            </Helmet>
             <div className="max-w-5xl mx-auto flex justify-center items-start bg-white rounded-lg  shadow-2xl">
                 <div>
                     <img src="https://i.ibb.co/5GqmCBq/fax.png" alt="" />
@@ -71,12 +76,12 @@ const Login = () => {
                             <IoMdKey className="absolute -left-8 top-2 text-2xl" />
                             <input type="password" {...register("password", { required: true })} placeholder="Your Password" className="border-b-2 mb-8 p-1 w-[300px]" />
                         </div>
-                        <button className="btn">Log in </button>
+                        <Button>Log in </Button>
                     </form>
 
                     <div className="flex items-center gap-5 my-5">
                         <p className="text-lg font-semibold">Or Login With </p>
-                        <button className="btn" onClick={handleSocialLogin}> <FcGoogle className="text-xl" /></button>
+                        <button className="btn bg-[#4F6F52] hover:bg-[#739072] text-white" onClick={handleSocialLogin}> <FcGoogle className="text-xl" /></button>
                     </div>
                 </div>
             </div>

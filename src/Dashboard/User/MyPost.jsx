@@ -5,6 +5,8 @@ import { FaCommentDots } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyPost = () => {
     const axiosSecure = useAxiosSecure();
@@ -53,30 +55,35 @@ const MyPost = () => {
 
 
     return (
-        <div className="overflow-x-auto m-10 border-2 border-b-0 p-5 rounded-md bg-[#ECE3CE]">
-            <table className="table">
-                {/* head */}
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Post Title</th>
-                        <th>Votes</th>
-                        <th>Comments</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {posts.map((post, ind) => <tr key={post._id}>
-                        <th>{ind + 1}</th>
-                        <td>{post.title}</td>
-                        <td>Rendering</td>
-                        <td> <button className="btn"><FaCommentDots className="hover:cursor-pointer text-2xl" /></button></td>
-                        <td> <button onClick={() => handleDelete(post._id)} className="btn"><FaRegTrashCan className="hover:cursor-pointer text-red-600 text-2xl" /></button></td>
+        <div className="bg-[#739072] min-h-screen p-10">
+            <div className="overflow-x-auto  border-2 border-b-0 p-5 rounded-md bg-[#ECE3CE]">
+                <Helmet>
+                    <title>Harmony | My Posts</title>
+                </Helmet>
+                <table className="table">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Post Title</th>
+                            <th>Votes</th>
+                            <th>Comments</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {posts.map((post, ind) => <tr key={post._id}>
+                            <th>{ind + 1}</th>
+                            <td>{post.title}</td>
+                            <td>Rendering</td>
+                            <td> <Link to={`/dashboard/mypost/${post.title}`} className="btn"><FaCommentDots className="hover:cursor-pointer text-2xl" /></Link></td>
+                            <td> <button onClick={() => handleDelete(post._id)} className="btn"><FaRegTrashCan className="hover:cursor-pointer text-red-600 text-2xl" /></button></td>
 
-                    </tr>)}
+                        </tr>)}
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

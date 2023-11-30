@@ -2,13 +2,16 @@ import { useForm } from "react-hook-form"
 import { FaUserAlt } from "react-icons/fa";
 import { IoMdKey } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 import { MdImage } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import useAxiosPublic from "../Utilities/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
+import Button from "../Components/Button";
+import Swal from "sweetalert2";
 
 
 
@@ -19,9 +22,14 @@ const Signup = () => {
     const imgbbapi = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbkey}`;
     const axiosPublic = useAxiosPublic();
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const handleSocialLogin = () => {
         socialLogin()
             .then(res => {
+                navigate(from, { replace: true });
                 const badge = "bronze"
                 const user = {
                     name: res.user?.displayName,
@@ -32,7 +40,13 @@ const Signup = () => {
                     .then(res => {
                         console.log(res.data);
                         if (res.data.insertedId) {
-                            alert("account created")
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Account Created Successfully.",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                         }
                     })
             })
@@ -56,14 +70,21 @@ const Signup = () => {
             .then(result => {
                 console.log(result.user);
                 const badge = "bronze"
-                const user = { name, email,badge }
+                const user = { name, email, badge }
                 updateUser(name, photo)
                     .then(() => {
+                        navigate(from, { replace: true });
                         axiosPublic.post("/users", user)
                             .then(res => {
                                 console.log(res.data);
                                 if (res.data.insertedId) {
-                                    alert("account created")
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "success",
+                                        title: "User Created Successfully.",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
                                 }
                             })
                     })
@@ -79,6 +100,9 @@ const Signup = () => {
     return (
         <div>
             <div className="bg-[#ECE3CE] min-h-screen">
+                <Helmet>
+                    <title>Harmony | Sign Up</title>
+                </Helmet>
                 <div className="max-w-5xl mx-auto flex justify-center items-center bg-white rounded-lg  shadow-2xl">
                     <div>
                         <img src="https://i.ibb.co/C0GG6jL/signup.png" alt="" />
@@ -105,13 +129,13 @@ const Signup = () => {
                                 <MdImage className="absolute -left-8 top-2 text-xl" /> <input {...register("image")} type="file" placeholder="Email" className="mb-8 p-1 w-[300px]" />
                             </div>
                             <div className="form-control">
-                                <button className="btn">Sign Up</button>
+                                <Button className="btn">Sign Up</Button>
                             </div>
                         </form>
 
                         <div className="flex items-center gap-5 my-5">
                             <p className="text-lg font-semibold">Or Sign up With </p>
-                            <button className="btn" onClick={handleSocialLogin}> <FcGoogle className="text-xl" /></button>
+                            <button className="btn bg-[#4F6F52] hover:bg-[#739072] text-white" onClick={handleSocialLogin}> <FcGoogle className="text-xl" /></button>
                         </div>
                     </div>
                 </div>

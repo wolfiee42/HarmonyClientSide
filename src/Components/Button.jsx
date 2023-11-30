@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 const Button = ({ children }) => {
     return (
-        <div className='btn'>
+        <button className='btn bg-[#4F6F52] hover:bg-[#739072] text-white'>
             {children}
-        </div>
+        </button>
     );
 };
 

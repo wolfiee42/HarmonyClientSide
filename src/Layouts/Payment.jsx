@@ -65,7 +65,7 @@ const Payment = () => {
                         if (res.data.modifiedCount > 0) {
                             Swal.fire({
                                 title: "Hurrah!",
-                                text: `${user.name} has been updated to ADMIN.`,
+                                text: `Congratulations! Gold Pass Purchased Successfully. `,
                                 icon: "success"
                             });
                         }
@@ -103,7 +103,7 @@ const Payment = () => {
 
 
     return (
-        <div style={styles.cardContainer}>
+        <div style={styles.cardContainer} className="text-white">
             <form onSubmit={handleForm}>
                 <label style={styles.cardLabel}>
                     <FontAwesomeIcon icon={faCreditCard} style={styles.icon} /> Card details

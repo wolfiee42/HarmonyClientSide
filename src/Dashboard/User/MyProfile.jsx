@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Utilities/useAuth";
 import useAxiosSecure from "../../Utilities/useAxiosSecure";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
     const axiosSecure = useAxiosSecure();
     const [posts, setpost] = useState([]);
     const { user } = useAuth();
-    const [char, setChar] = useState({})
+    const [char, setChar] = useState([])
     useEffect(() => {
-        axiosSecure.get(`/users/${user.email}`)
+        axiosSecure.get(`/users/${user?.email}`)
             .then(res => {
                 setChar(res.data);
                 console.log(res.data);
@@ -26,8 +27,11 @@ const MyProfile = () => {
 
 
     return (
-        <div>
-            <div className="bg-[#ECE3CE] w-[900px] mx-auto mt-20 rounded-lg">
+        <div className="bg-[#739072] py-20">
+             <Helmet>
+                <title>Harmony | My Profile</title>
+            </Helmet>
+            <div className="bg-[#ECE3CE] w-[900px] mx-auto  rounded-lg">
                 <div className="flex justify-between items-start p-10 ">
                     <div className="space-y-5">
                         <h1 className="uppercase text-3xl flex items-center gap-5"><span className="font-semibold">User: </span>

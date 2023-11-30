@@ -41,10 +41,10 @@ const Posts = (search) => {
                     posts.map(post => <Post key={post._id} post={post} />)
                 }
             </div>
-            <div className='my-5'>
+            <div className='py-5'>
                 {
                     pages.map(page =>
-                        <button onClick={() => setCurrentPage(page)} className='btn mx-2' key={page}>{page + 1}</button>
+                        <button onClick={() => setCurrentPage(page)} className='btn mx-2 bg-[#4F6F52] hover:bg-[#739072] text-white' key={page}>{page + 1}</button>
                     )
                 }
             </div>

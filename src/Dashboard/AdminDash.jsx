@@ -14,13 +14,13 @@ const AdminDash = () => {
                 </NavLink>
             </li>
             <li>
-                <NavLink to='/dashboard/report'>
-                    <p>Report</p>
+                <NavLink to='/dashboard/announcement'>
+                    <p>Announcement</p>
                 </NavLink>
             </li>
             <li>
-                <NavLink to='/dashboard/announcement'>
-                    <p>Announcement</p>
+                <NavLink to='/dashboard/report'>
+                    <p>Report</p>
                 </NavLink>
             </li>
         </div>

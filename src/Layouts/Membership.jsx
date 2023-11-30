@@ -6,6 +6,7 @@ import useAxiosSecure from "../Utilities/useAxiosSecure";
 import useAuth from "../Utilities/useAuth";
 import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -27,19 +28,24 @@ const Membership = () => {
         Swal.fire({
             title: "You're already a Gold Badge Holder",
             icon: "info"
-          });
+        });
         return <Navigate to='/'></Navigate>
     }
 
     return (
-        <div className="w-[550px] mx-auto my-20">
-            <div className="flex justify-between items-center mb-7 text-xl font-bold">
-                <h1>Make Your Payment for Membership</h1>
-                <p>Total bill: $9.99</p>
+        <div className="bg-[#739072] min-h-screen text-white py-20">
+            <div className="w-[550px] mx-auto">
+                <Helmet>
+                    <title>Harmony | Memberbership</title>
+                </Helmet>
+                <div className="flex justify-between items-center mb-7 text-xl font-bold">
+                    <h1>Make Your Payment for Membership</h1>
+                    <p>Total bill: $9.99</p>
+                </div>
+                <Elements stripe={stripePromise}>
+                    <Payment />
+                </Elements>
             </div>
-            <Elements stripe={stripePromise}>
-                <Payment />
-            </Elements>
         </div>
     );
 };

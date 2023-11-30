@@ -4,6 +4,7 @@ import { FaUser } from "react-icons/fa";
 import Swal from 'sweetalert2'
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Utilities/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const ManageUser = () => {
     const axiosSecure = useAxiosSecure();
@@ -59,35 +60,40 @@ const ManageUser = () => {
         });
     }
     return (
-        <div className="overflow-x-auto p-10">
-            <table className="table">
-                {/* head */}
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Memberbership Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        users?.map((user, ind) => <tr key={user.email}>
-                            <th>{ind + 1}</th>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            {/* <td><button onClick={() => handleMakeAdmin(user)} className="btn"><FaUser /></button></td> */}
-                            <td>
-                                {user?.role ? "admin" : <button onClick={() => handleMakeAdmin(user)} className="btn"><FaUser /></button>}
+        <div className="bg-[#739072] min-h-screen p-10">
+            <div className="overflow-x-auto border-2 border-b-0 p-5 rounded-md bg-[#ECE3CE]">
+                <Helmet>
+                    <title>Harmony | Manage User</title>
+                </Helmet>
+                <table className="table">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Memberbership Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            users?.map((user, ind) => <tr key={user.email}>
+                                <th>{ind + 1}</th>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                {/* <td><button onClick={() => handleMakeAdmin(user)} className="btn"><FaUser /></button></td> */}
+                                <td>
+                                    {user?.role ? "admin" : <button onClick={() => handleMakeAdmin(user)} className="btn bg-[#4F6F52] hover:bg-[#739072] text-white"><FaUser /></button>}
 
-                            </td>
-                            <td>{user?.badge}</td>
-                        </tr>)
-                    }
+                                </td>
+                                <td>{user?.badge}</td>
+                            </tr>)
+                        }
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

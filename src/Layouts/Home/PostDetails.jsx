@@ -42,7 +42,7 @@ const PostDetails = () => {
             axiosSecure.post('/comments', commentPack)
                 .then(res => {
                     if (res.data.insertedId) {
-                        Swal.fire(`Your IP address is ${comment}`);
+                        Swal.fire(`Your Comment is " ${comment} "`);
                     }
                 })
                 .catch(error => {
@@ -51,32 +51,34 @@ const PostDetails = () => {
         }
     }
     return (
-        <Container>
-            <div className="flex flex-col border-2 p-5 mx-3 my-10 rounded-md shadow-2xl bg-[#ECE3CE]">
-                <div className="flex gap-5 items-center">
-                    <div>
-                        <img className="w-16 h-16 rounded-[50%]" src={authorImg} alt="" />
+        <div className="bg-[#739072] p-10 min-h-screen">
+            <Container>
+                <div className="flex flex-col border-2 p-5 mx-3      rounded-md shadow-2xl bg-[#ECE3CE]">
+                    <div className="flex gap-5 items-center">
+                        <div>
+                            <img className="w-16 h-16 rounded-[50%]" src={authorImg} alt="" />
+                        </div>
+                        <div>
+                            <h1 className="text-lg">{author}</h1>
+                            <p>{time}</p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 className="text-lg">{author}</h1>
-                        <p>{time}</p>
+                    <div className="my-5 space-y-3">
+                        <p className="underline">#{posttag}</p>
+                        <h1 className="text-2xl font-semibold">Title: {title}</h1>
+                        <p className="text-xl font-semibold">Description: <span className="text-xl">{description}</span></p>
+                    </div>
+                    <div className="divider"></div>
+                    <div className="flex justify-around gap-3">
+                        <button className="btn flex-grow bg-[#4F6F52] hover:bg-[#739072] text-white"><AiFillLike className="text-xl" /></button>
+                        <button className="btn flex-grow bg-[#4F6F52] hover:bg-[#739072] text-white"><AiFillDislike className="text-xl" /></button>
+                        {user ?
+                            <button onClick={handleComment} className="btn flex-grow bg-[#4F6F52] hover:bg-[#739072] text-white"><FaComment className="text-xl" /></button> :
+                            <Link className="btn flex-grow bg-[#4F6F52] hover:bg-[#739072] text-white" to={'/login'} state={{ from: location }} replace><FaComment className="text-xl" /></Link>}
                     </div>
                 </div>
-                <div className="my-5 space-y-3">
-                    <p className="underline">#{posttag}</p>
-                    <h1 className="text-2xl font-semibold">Title: {title}</h1>
-                    <p className="text-xl font-semibold">Description: <span className="text-xl">{description}</span></p>
-                </div>
-                <div className="divider"></div>
-                <div className="flex justify-around gap-3">
-                    <button className="btn flex-grow"><AiFillLike className="text-xl" /></button>
-                    <button className="btn flex-grow"><AiFillDislike className="text-xl" /></button>
-                    {user ? 
-                    <button onClick={handleComment} className="btn flex-grow"><FaComment className="text-xl" /></button> : 
-                    <Link className="btn flex-grow" to={'/login'} state={{from: location}} replace><FaComment className="text-xl" /></Link>}
-                </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 };
 

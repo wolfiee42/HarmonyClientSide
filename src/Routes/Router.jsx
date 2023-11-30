@@ -17,6 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import Home from "../Layouts/Home/Home";
 import PostDetails from "../Layouts/Home/PostDetails";
 import Membership from "../Layouts/Membership";
+import PostComments from "../Dashboard/PostComments";
 
 const Router = createBrowserRouter([
     {
@@ -65,6 +66,11 @@ const Router = createBrowserRouter([
             {
                 path: '/dashboard/mypost',
                 element: <PrivateRoute><MyPost /></PrivateRoute>
+            },
+            {
+                path: '/dashboard/mypost/:title',
+                element: <PrivateRoute><PostComments /></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/comments/${params.title}`)
             },
 
             // admin
