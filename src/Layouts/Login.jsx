@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosPublic from "../Utilities/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
@@ -48,7 +49,13 @@ const Login = () => {
                     .then(res => {
                         console.log(res.data);
                         if (res.data.insertedId) {
-                            alert("account created")
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Account Created Successfully.",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                         }
                     })
             })

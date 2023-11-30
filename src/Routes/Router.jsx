@@ -18,6 +18,7 @@ import Home from "../Layouts/Home/Home";
 import PostDetails from "../Layouts/Home/PostDetails";
 import Membership from "../Layouts/Membership";
 import PostComments from "../Dashboard/PostComments";
+import AdminRouter from "./AdminRouter";
 
 const Router = createBrowserRouter([
     {
@@ -76,19 +77,19 @@ const Router = createBrowserRouter([
             // admin
             {
                 path: '/dashboard/admindash',
-                element: <AdminProfile />,
+                element: <AdminRouter><AdminProfile /></AdminRouter>,
             },
             {
                 path: '/dashboard/manageuser',
-                element: <ManageUser />,
+                element: <AdminRouter><ManageUser /></AdminRouter>,
             },
             {
                 path: '/dashboard/report',
-                element: <Report />,
+                element: <AdminRouter> <Report /></AdminRouter>,
             },
             {
                 path: '/dashboard/announcement',
-                element: <Announcement />,
+                element: <AdminRouter><Announcement /></AdminRouter>,
             },
 
         ]

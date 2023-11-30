@@ -65,8 +65,8 @@ const PostDetails = () => {
                     </div>
                     <div className="my-5 space-y-3">
                         <p className="underline">#{posttag}</p>
-                        <h1 className="text-2xl font-semibold">Title: {title}</h1>
-                        <p className="text-xl font-semibold">Description: <span className="text-xl">{description}</span></p>
+                        <h1 className="text-2xl font-semibold"> {title}</h1>
+                        <p className="text-xl font-semibold"><span className="text-xl">{description}</span></p>
                     </div>
                     <div className="divider"></div>
                     <div className="flex justify-around gap-3">

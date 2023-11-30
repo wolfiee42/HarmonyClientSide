@@ -26,8 +26,8 @@ const Announ = () => {
                         </div>
                     </div>
                     <div className="my-5 space-y-3">
-                        <h1 className="text-2xl font-semibold">Title: {announc.annTitle}</h1>
-                        <p className="text-xl font-semibold">Description: {announc.annDesc}<span className="text-xl"></span></p>
+                        <h1 className="text-2xl font-semibold">{announc.annTitle}</h1>
+                        <p className="text-xl font-semibold">{announc.annDesc}<span className="text-xl"></span></p>
                     </div>
                 </div>)}
 

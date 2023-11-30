@@ -41,7 +41,7 @@ const Signup = () => {
                         console.log(res.data);
                         if (res.data.insertedId) {
                             Swal.fire({
-                                position: "top-end",
+                                position: "center",
                                 icon: "success",
                                 title: "Account Created Successfully.",
                                 showConfirmButton: false,
