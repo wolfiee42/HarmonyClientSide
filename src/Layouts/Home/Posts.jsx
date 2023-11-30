@@ -2,7 +2,8 @@ import useAxiosPublic from '../../Utilities/useAxiosPublic';
 import { useEffect, useState } from 'react';
 import Post from './Post';
 
-const Posts = () => {
+const Posts = (search) => {
+    const searchBar = search.search
     const axiosPublic = useAxiosPublic();
     const [posts, setPosts] = useState([]);
     const [count, setcount] = useState(null)
@@ -14,7 +15,7 @@ const Posts = () => {
     const pages = [...Array(numOfPages).keys()];
 
     useEffect(() => {
-        axiosPublic.get(`/posts?page=${currentPage}&size=${itemPerPage}`)
+        axiosPublic.get(`/posts?search=${searchBar}&page=${currentPage}&size=${itemPerPage}`)
             .then(res => {
                 setPosts(res.data.result);
 
@@ -22,7 +23,7 @@ const Posts = () => {
             .catch(error => {
                 console.log(error);
             })
-    }, [axiosPublic, currentPage]);
+    }, [axiosPublic, currentPage, searchBar]);
     useEffect(() => {
         axiosPublic.get('/postcount')
             .then(res => {
@@ -41,8 +42,8 @@ const Posts = () => {
             </div>
             <div className='my-5'>
                 {
-                    pages.map(page => 
-                    <button onClick={() => setCurrentPage(page)} className='btn mx-2' key={page}>{page + 1}</button>
+                    pages.map(page =>
+                        <button onClick={() => setCurrentPage(page)} className='btn mx-2' key={page}>{page + 1}</button>
                     )
                 }
             </div>
