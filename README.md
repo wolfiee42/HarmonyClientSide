@@ -1,7 +1,5 @@
-## Harmony is Social Media Platform where you can interact with your friends.
+## Harmony is Social Media Platform.
 
-
-### Live Link
 [Harmony](https://harmony-ed17b.web.app/)
 
 
