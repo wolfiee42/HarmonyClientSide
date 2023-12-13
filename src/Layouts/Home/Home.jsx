@@ -4,6 +4,7 @@ import Posts from './Posts';
 import TagSection from './TagSection';
 import Announ from './Announ';
 import { Helmet } from 'react-helmet-async';
+import Contact from './Contact';
 
 const Home = () => {
     const [search, setSearch] = useState('');
@@ -16,7 +17,7 @@ const Home = () => {
     }
     return (
         <div className='bg-[#739072]'>
-             <Helmet>
+            <Helmet>
                 <title>Harmony | Home</title>
             </Helmet>
             <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/wsMdtH8/anton-darius-H1-ZUlh1l-C7-Q-unsplash.jpg)' }}>
@@ -34,8 +35,9 @@ const Home = () => {
             </div>
             <Container>
                 <TagSection />
-                <Announ/>
+                <Announ />
                 <Posts search={search} />
+                <Contact />
             </Container>
         </div>
     );

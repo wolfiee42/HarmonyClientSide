@@ -19,7 +19,7 @@ const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUser, socialLogin } = useContext(AuthContext);
     const imgbbkey = import.meta.env.VITE_imgbb_key;
-    const imgbbapi = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbkey}`;
+    const imgbbapi = `https://api.imgbb.com/1/upload?key=${imgbbkey}`;
     const axiosPublic = useAxiosPublic();
 
     const navigate = useNavigate();
