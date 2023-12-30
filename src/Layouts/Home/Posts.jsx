@@ -1,9 +1,10 @@
 import useAxiosPublic from '../../Utilities/useAxiosPublic';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Post from './Post';
+import { AuthSearchContext } from '../../Provider/SearchProvider';
 
-const Posts = (search) => {
-    const searchBar = search.search
+const Posts = () => {
+    const { search } = useContext(AuthSearchContext);
     const axiosPublic = useAxiosPublic();
     const [posts, setPosts] = useState([]);
     const [count, setcount] = useState(null)
@@ -15,15 +16,14 @@ const Posts = (search) => {
     const pages = [...Array(numOfPages).keys()];
 
     useEffect(() => {
-        axiosPublic.get(`/posts?search=${searchBar}&page=${currentPage}&size=${itemPerPage}`)
+        axiosPublic.get(`/posts?search=${search}&page=${currentPage}&size=${itemPerPage}`)
             .then(res => {
                 setPosts(res.data.result);
-
             })
             .catch(error => {
                 console.log(error);
             })
-    }, [axiosPublic, currentPage, searchBar]);
+    }, [axiosPublic, currentPage, search]);
     useEffect(() => {
         axiosPublic.get('/postcount')
             .then(res => {

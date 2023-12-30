@@ -26,7 +26,6 @@ const Navbar = () => {
     useEffect(() => {
         axiosPublic.get('/announcementcount')
             .then(res => {
-                console.log(res.data.result);
                 setAnnoun(res.data.result);
 
             })
