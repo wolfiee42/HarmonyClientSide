@@ -13,7 +13,6 @@ const AdminProfile = () => {
     useEffect(() => {
         axiosSecure.get('/postcount')
             .then(res => {
-                console.log(res.data.result);
                 setPost(res.data.result);
             })
     }, [axiosSecure])
@@ -21,7 +20,6 @@ const AdminProfile = () => {
     useEffect(() => {
         axiosSecure.get('/commnetcount')
             .then(res => {
-                console.log(res.data.result);
                 setcomments(res.data.result);
             })
     }, [axiosSecure])
@@ -29,7 +27,6 @@ const AdminProfile = () => {
     useEffect(() => {
         axiosSecure.get('/usercount')
             .then(res => {
-                console.log(res.data.result);
                 setusers(res.data.result);
             })
     }, [axiosSecure])
@@ -39,7 +36,7 @@ const AdminProfile = () => {
 
     const { user } = useAuth();
     return (
-        <div className="bg-[#739072] py-20">
+        <div className="bg-[#739072] min-h-screen py-20">
             <div className="w-[900px] mx-auto rounded-lg">
                 <Helmet>
                     <title>Harmony | Admin</title>

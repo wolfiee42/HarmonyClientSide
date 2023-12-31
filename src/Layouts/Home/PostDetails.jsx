@@ -59,8 +59,8 @@ const PostDetails = () => {
                             <img className="w-16 h-16 rounded-[50%]" src={authorImg} alt="" />
                         </div>
                         <div>
-                            <h1 className="text-lg">{author}</h1>
-                            <p>{time}</p>
+                            <h1 className="text-lg font-semibold">{author}</h1>
+                            <p>{time.split("T")[1].split(".")[0]} {time.split("T")[0]}</p>
                         </div>
                     </div>
                     <div className="my-5 space-y-3">

@@ -76,10 +76,10 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                     {
-                                        user && !isAdmin && <li><Link to='/dashboard/myprofile'>Dashboard</Link></li>
+                                        user && !!isAdmin && <li><Link to='/dashboard/admindash'>Dashboard</Link></li>
                                     }
                                     {
-                                        user && !!isAdmin && <li><Link to='/dashboard/admindash'>Dashboard</Link></li>
+                                        user && !isAdmin && <li><Link to='/dashboard/myprofile'>Dashboard</Link></li>
                                     }
                                     <li><p onClick={handleLogout}>Logout</p></li>
                                 </ul>

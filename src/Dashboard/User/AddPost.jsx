@@ -104,11 +104,11 @@ const AddPost = () => {
                             <option value='Tour'>Tour</option>
                         </select>
                     </div>
-                    <div className="flex justify-between ">
-                        <div className="flex-grow">
+                    <div className="flex justify-start gap-24">
+                        <div className="">
                             <button disabled className="btn w-[240px]"><AiFillLike className="text-xl" /> (0)</button>
                         </div>
-                        <div className="flex-grow">
+                        <div className="">
                             <button disabled className="btn w-[240px]"><AiFillDislike className="text-xl" /> (0)</button>
                         </div>
                     </div>

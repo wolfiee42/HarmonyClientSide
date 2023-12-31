@@ -27,7 +27,7 @@ const MyProfile = () => {
 
 
     return (
-        <div className="bg-[#739072] py-20">
+        <div className="bg-[#739072] min-h-screen py-20">
              <Helmet>
                 <title>Harmony | My Profile</title>
             </Helmet>
@@ -49,16 +49,14 @@ const MyProfile = () => {
             <div className="w-[900px] mx-auto mt-20">
                 <h1 className="text-3xl font-semibold">Recent Posts</h1>
                 {posts.map(post => <div key={post._id} className="flex bg-[#ECE3CE] rounded-md my-5 p-5 justify-around items-center shadow-2xl" >
-                    <div className="flex flex-col items-center space-y-3">
+                    <div className="w-1/2 flex flex-col items-center space-y-3">
                         <img className="rounded-[50%]" src={post.authorImg} alt="" />
-                        <h1 className="text-2xl font-semibold">Author: <span className="uppercase">{post.author}</span></h1>
                     </div>
-                    <div className="space-y-4">
+                    <div className="w-1/2 space-y-4">
+                        <h1 className="text-2xl font-semibold">Author: <span className="uppercase">{post.author}</span></h1>
                         <h1 className="text-xl font-medium">Post Title: <span>{post.title}</span></h1>
                         <p className="text-xl font-medium">Post Tag: <span className="underline font-semibold">#{post.posttag}</span></p>
-                        <p className="text-xl font-mediu">Post Time: <span>{post.time}</span></p>
-                        <p className="flex items-center gap-10 text-xl font-medium"><AiFillLike className="text-2xl" />: {post.UpVote}</p>
-                        <p className="flex items-center gap-10 text-xl font-medium"><AiFillDislike className="text-2xl" />: {post.downvote}</p>
+                        <p className="text-xl font-mediu">Post Time: <span>{post.time.split("T")[1].split(".")[0]} {post.time.split("T")[0]}</span></p>
                     </div>
                 </div>)}
             </div>

@@ -22,7 +22,7 @@ const Announ = () => {
                         </div>
                         <div>
                             <h1 className="text-lg">{announc.auhtorName}</h1>
-                            <p>{announc.time}</p>
+                            <p>{announc.time.split("T")[1].split(".")[0]} {announc.time.split("T")[0]}</p>
                         </div>
                     </div>
                     <div className="my-5 space-y-3">

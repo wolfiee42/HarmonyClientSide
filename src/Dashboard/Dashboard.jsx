@@ -9,12 +9,13 @@ const Dashboard = () => {
     const [isAdmin] = useAdmin();
     return (
         <div className='flex'>
-             <Helmet>
+            <Helmet>
                 <title>Harmony | Dashboard</title>
             </Helmet>
             <div className='w-1/5 min-h-screen pt-5 bg-[#ECE3CE] '>
                 <ul className='menu'>
-                    {isAdmin ? <AdminDash /> : <UserDash />}
+                    {isAdmin === true ? <AdminDash /> : <UserDash />}
+
                     <div className="divider"></div>
                     <li>
                         <NavLink to={'/'}>

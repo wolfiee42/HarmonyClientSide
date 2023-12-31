@@ -34,7 +34,7 @@ const Posts = () => {
 
 
     return (
-        <div>
+        <div className='my-40'>
             <h1 className=" text-3xl font-semibold my-8 ">Posts Section</h1>
             <div className='my-10'>
                 {

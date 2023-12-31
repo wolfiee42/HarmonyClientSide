@@ -25,7 +25,7 @@ const Contact = () => {
         <div className='pb-10'>
             <div className="min-h-fit bg-[#ECE3CE] px-5 py-10 rounded-lg">
 
-                <h1 className='text-3xl font-semibold my-8'>Contact Us</h1>
+                <h1 className='text-3xl md:text-5xl font-semibold my-8 text-center'>Contact Us</h1>
                 <div className="hero min-h-fit">
                     <div className="hero-content flex-col items-center lg:flex-row">
                         <div className="text-center w-[500px] lg:text-left">
